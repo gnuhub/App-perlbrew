@@ -11,9 +11,3 @@ before_install:
   - ./dev-bin/travis-prepare.sh
 script:
   perl ./Makefile.PL && make && cover -test -report coveralls
-
-notifications:
-  irc:
-    channels:
-      - "irc.freenode.org#chupei.pm"
-    use_notice: true
