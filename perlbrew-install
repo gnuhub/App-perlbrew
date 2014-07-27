@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -x
 PERLBREWURL=http://gugod.github.io/App-perlbrew/perlbrew
 
 if [ -z "$TMPDIR" ]; then
