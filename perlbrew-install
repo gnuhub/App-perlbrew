@@ -9,6 +9,8 @@ if [ -z "$TMPDIR" ]; then
         TMPDIR="."
     fi
 fi
+# mac 下 $TMPDIR
+# /var/folders/71/3ck56qx933bfpqj96m87gx400000gn/T/
 
 cd $TMPDIR || exit 1
 
@@ -16,7 +18,14 @@ LOCALINSTALLER="perlbrew-$$"
 
 echo
 if type curl >/dev/null 2>&1; then
+  # 如果curl存在，使用curl下载
   PERLBREWDOWNLOAD="curl -f -k -sS -Lo $LOCALINSTALLER $PERLBREWURL"
+  # -S, --show-error    Show error. With -s, make curl show errors when they occur
+  # -s, --silent        Silent mode. Don't output anything
+  # -k, --insecure      Allow connections to SSL sites without certs (H)
+  # -L, --location      Follow redirects (H)
+  # -o, --output FILE   Write output to <file> instead of stdout
+  # PERLBREWDOWNLOAD='curl -f -k -sS -Lo perlbrew-89249 http://gugod.github.io/App-perlbrew/perlbrew'
 elif type fetch >/dev/null 2>&1; then
   PERLBREWDOWNLOAD="fetch --no-verify-peer -o $LOCALINSTALLER $PERLBREWURL"
 elif type wget >/dev/null 2>&1; then
@@ -33,15 +42,15 @@ clean_exit () {
 
 echo "## Download the latest perlbrew"
 $PERLBREWDOWNLOAD || clean_exit 1
-
+# 下载 https://github.com/gnuhub/App-perlbrew/blob/gnuhub_perlbrew/perlbrew
 echo
 echo "## Installing perlbrew"
 chmod +x $LOCALINSTALLER
 /usr/bin/perl $LOCALINSTALLER self-install || clean_exit 1
-
+# /usr/bin/perl perlbrew-89249 self-install
 echo "## Installing patchperl"
 /usr/bin/perl $LOCALINSTALLER -f -q install-patchperl || clean_exit 1
-
+# /usr/bin/perl perlbrew-89249 -f -q install-patchperl
 echo
 echo "## Done."
 rm ./$LOCALINSTALLER
