@@ -51,3 +51,10 @@ Happy brewing!
 ## Done.
 + rm ./perlbrew-89249
 ```
+
+* 直接调试源码
+
+```
+cd bin
+perl -d -I../lib perlbrew --version
+```
