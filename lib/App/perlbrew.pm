@@ -253,7 +253,16 @@ sub editdist {
 
 sub new {
     my($class, @argv) = @_;
+    # x @_
+    # 0  'App::perlbrew'
+    # 1  '--version'
 
+    #  x $class 
+    # 0  'App::perlbrew'
+
+    # x @argv
+    # 0  '--version'
+    
     my %opt = (
         original_argv  => \@argv,
         args => [],

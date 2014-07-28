@@ -3,6 +3,8 @@ use strict;
 use App::perlbrew;
 
 my $app = App::perlbrew->new(@ARGV);
+# x @ARGV
+# --version
 $app->run();
 
 __END__
